@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const Header = () => {
   const openMobileMenu = () => {
     const mobileNavToggleBtn = document.querySelector(".mobile-nav-toggle");
@@ -23,13 +24,13 @@ const Header = () => {
           <nav id="navmenu" className="navmenu">
             <ul>
               <li>
-                <a href="index.html" className="active">
+                <Link to="/" className="active">
                   Home
                   <br />
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="about.html">About</a>
+                <Link to="/about">About</Link>
               </li>
               <li>
                 <a href="courses.html">Courses</a>
