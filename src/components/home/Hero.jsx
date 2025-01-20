@@ -4,7 +4,7 @@ const Hero = () => {
       <section id="hero" className="hero section dark-background">
         <img src="/assets/img/hero-bg.jpg" alt="" data-aos="fade-in" />
         <div className="container">
-          <h2 data-aos="fade-up" data-aos-delay={100}>
+          <h2 data-aos="fade-up">
             Learning Today,
             <br />
             Leading Tomorrow

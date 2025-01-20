@@ -33,62 +33,20 @@ const Header = () => {
                 <Link to="/about">About</Link>
               </li>
               <li>
-                <a href="courses.html">Courses</a>
+                <Link to="/courses">Courses</Link>
               </li>
               <li>
-                <a href="trainers.html">Trainers</a>
+                <Link to="/trainers">Trainers</Link>
               </li>
               <li>
-                <a href="events.html">Events</a>
+                <Link to="/events">Events</Link>
               </li>
               <li>
-                <a href="pricing.html">Pricing</a>
+                <Link to="/pricing">Pricing</Link>
               </li>
-              <li className="dropdown">
-                <a href="#">
-                  <span>Dropdown</span>{" "}
-                  <i className="bi bi-chevron-down toggle-dropdown" />
-                </a>
-                <ul>
-                  <li>
-                    <a href="#">Dropdown 1</a>
-                  </li>
-                  <li className="dropdown">
-                    <a href="#">
-                      <span>Deep Dropdown</span>{" "}
-                      <i className="bi bi-chevron-down toggle-dropdown" />
-                    </a>
-                    <ul>
-                      <li>
-                        <a href="#">Deep Dropdown 1</a>
-                      </li>
-                      <li>
-                        <a href="#">Deep Dropdown 2</a>
-                      </li>
-                      <li>
-                        <a href="#">Deep Dropdown 3</a>
-                      </li>
-                      <li>
-                        <a href="#">Deep Dropdown 4</a>
-                      </li>
-                      <li>
-                        <a href="#">Deep Dropdown 5</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="#">Dropdown 2</a>
-                  </li>
-                  <li>
-                    <a href="#">Dropdown 3</a>
-                  </li>
-                  <li>
-                    <a href="#">Dropdown 4</a>
-                  </li>
-                </ul>
-              </li>
+              
               <li>
-                <a href="contact.html">Contact</a>
+                <Link to="/contact">Contact</Link>
               </li>
             </ul>
             <i
@@ -96,9 +54,9 @@ const Header = () => {
               onClick={openMobileMenu}
             />
           </nav>
-          <a className="btn-getstarted" href="courses.html">
+          <Link className="btn-getstarted" to="/courses">
             Get Started
-          </a>
+          </Link>
         </div>
       </header>
     </>
