@@ -1,4 +1,10 @@
+import { useState,useEffect } from "react";
+import { fetchTeacher } from "../../api_integration/api";
 const Trainer = () => {
+  useEffect(() => {
+     fetchTeacher();
+  }, []);
+
   return (
     <>
       <section id="trainers-index" className="section trainers-index">
