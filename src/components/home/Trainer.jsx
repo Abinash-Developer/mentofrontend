@@ -1,10 +1,14 @@
 import { useState,useEffect } from "react";
 import { fetchTeacher } from "../../api_integration/api";
 const Trainer = () => {
+  const [trainners,setTrainners] = useState([]);
   useEffect(() => {
-     fetchTeacher();
+     fetchTeacher().then((result)=>{
+       setTrainners(result);
+     }).catch((error)=>{
+       console.log(error);
+     });
   }, []);
-
   return (
     <>
       <section id="trainers-index" className="section trainers-index">
