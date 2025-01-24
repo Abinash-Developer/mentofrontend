@@ -1,10 +1,9 @@
 import { useState,useEffect } from "react";
 import { fetchTeacher } from "../../api_integration/api";
 const Trainer = () => {
-  const [trainners,setTrainners] = useState([]);
+ 
   useEffect(() => {
      fetchTeacher().then((result)=>{
-       setTrainners(result);
      }).catch((error)=>{
        console.log(error);
      });
