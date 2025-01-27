@@ -1,11 +1,19 @@
 import { Link } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
 const Header = () => {
   const openMobileMenu = () => {
     const mobileNavToggleBtn = document.querySelector(".mobile-nav-toggle");
-    document.querySelector("body").classList.toggle("mobile-nav-active");
-    mobileNavToggleBtn.classList.toggle("bi-list");
-    mobileNavToggleBtn.classList.toggle("bi-x");
-  };
+      document.querySelector("body").classList.toggle("mobile-nav-active");
+      mobileNavToggleBtn.classList.toggle("bi-list");
+      mobileNavToggleBtn.classList.toggle("bi-x");
+    };
+    const responseMessage = (response) => {
+        console.log("Google Response =",jwt_decode(response.credential));
+    };
+    const errorMessage = (error) => {
+        console.log(error);
+    };
   return (
     <>
       <header
@@ -41,9 +49,9 @@ const Header = () => {
               <li>
                 <Link to="/events">Events</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/pricing">Pricing</Link>
-              </li>
+              </li> */}
               
               <li>
                 <Link to="/contact">Contact</Link>
@@ -54,8 +62,8 @@ const Header = () => {
               onClick={openMobileMenu}
             />
           </nav>
-          <Link className="btn-getstarted" to="/courses">
-            Get Started
+          <Link className="btn-getstarted" to="">
+          <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
           </Link>
         </div>
       </header>

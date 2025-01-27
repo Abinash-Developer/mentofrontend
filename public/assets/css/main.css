@@ -1901,3 +1901,7 @@ html:not(.no-js) [data-aos^=zoom][data-aos^=zoom] {
   -webkit-transform: translateZ(0) scale(1);
   transform: translateZ(0) scale(1);
 }
+
+a.detail_page_link {
+  pointer-events: all;
+}

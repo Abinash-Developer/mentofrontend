@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState,useEffect } from "react";
 import { API_URL } from "../../constants";
+import { Link } from "react-router-dom";
 const Course = () => {
   const [allCourse,setallCourse] = useState([]);
   useEffect(()=>{
@@ -15,7 +16,6 @@ const Course = () => {
      }
   }
   return (
-    <>
       <section id="courses" className="courses section">
         <div className="container">
           <div className="row">
@@ -38,7 +38,7 @@ const Course = () => {
                     <p className="price">${course.course_fee?.$numberDecimal}</p>
                   </div>
                   <h3>
-                    <a href="course-details.html">{course.title}</a>
+                    <Link to={`/course-detail/${course._id}`} class="detail_page_link">{course.title}</Link>
                   </h3>
                   <p className="description">
                     {course.description}
@@ -69,7 +69,6 @@ const Course = () => {
           </div>
         </div>
       </section>
-    </>
   );
 };
 export default Course;

@@ -8,6 +8,7 @@ import Trainer from './pages/Trainer';
 import Events from './pages/Events';
 import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
+import CourseSingle from './pages/CourseSingle';
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/course-detail/:id" element={<CourseSingle />} />
       </Routes>
      </main>
     <Footer/>
