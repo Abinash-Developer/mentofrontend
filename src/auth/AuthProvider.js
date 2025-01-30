@@ -12,13 +12,11 @@ const AuthProvider = ({ children }) => {
    
     try {
       const response = await axios.post(`${API_URL}/create-student/`,data);
-      console.log("response= ",response);
       if (response.data) {
         setToken(response.data.token);
         localStorage.setItem("site", response.data.token);
-        return 1;
+        return true;
       }
-    //   throw new Error(res.message);
     } catch (err) {
       console.error(err);
     }
@@ -27,7 +25,7 @@ const AuthProvider = ({ children }) => {
   const logOut = () => {
     setToken("");
     localStorage.removeItem("site");
-    navigate("/login");
+    navigate("/");
   };
 
   return (

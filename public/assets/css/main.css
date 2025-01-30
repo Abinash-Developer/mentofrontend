@@ -1905,3 +1905,11 @@ html:not(.no-js) [data-aos^=zoom][data-aos^=zoom] {
 a.detail_page_link {
   pointer-events: all;
 }
+button.booking_class {
+  pointer-events: all;
+  background-color: #5fcf80;
+  border: none;
+  height: 32px;
+  box-shadow: 3px 7px 5px 0px;
+  border-radius: 30px;
+}

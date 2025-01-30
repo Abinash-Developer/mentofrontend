@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import axios from "axios";
-import { API_URL } from "../constants";
 import StatusAlert, { StatusAlertService } from 'react-status-alert';
 import 'react-status-alert/dist/status-alert.css';
 import { useAuth } from "../auth/AuthProvider";
 const Header = () => {
 const auth = useAuth();
-console.log("Authantication =",auth); 
+console.log(auth);
   const openMobileMenu = () => {
     const mobileNavToggleBtn = document.querySelector(".mobile-nav-toggle");
     document.querySelector("body").classList.toggle("mobile-nav-active");
@@ -26,12 +24,10 @@ console.log("Authantication =",auth);
         password: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
         role:'student'
       };
-      const studentsResult = auth.loginAction(userObj);
-      // const studentsResult = await axios.post(`${API_URL}/create-student`,userObj);
-      // if(studentsResult.data.status){
-      //   StatusAlertService.showSuccess('You have been register successfully !!');
-      // }
-      console.log(studentsResult);
+      const studentsResult = await auth.loginAction(userObj);
+      if(studentsResult){
+        StatusAlertService.showSuccess('You have been Logged in successfully !!');
+      }
     } catch (error) {
       console.log(error);
     }
@@ -39,6 +35,9 @@ console.log("Authantication =",auth);
   const errorMessage = (error) => {
     console.log(error);
   };
+  const mentor_logout = ()=>{
+    auth.logOut();
+  }
   return (
     <>
     <StatusAlert/>
@@ -88,9 +87,15 @@ console.log("Authantication =",auth);
               onClick={openMobileMenu}
             />
           </nav>
-          <Link className="btn-getstarted" to="">
-            <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
-          </Link>
+            {auth.token ?(
+              <>
+              <Link to="javascript:void(0)" className="btn-getstarted" onClick={mentor_logout}>Logout</Link>
+              </>
+            ):(
+              <Link className="btn-getstarted" to="">
+              <GoogleLogin className="btn-getstarted" onSuccess={responseMessage} onError={errorMessage} />
+              </Link>
+            )}
         </div>
       </header>
     </>

@@ -2,7 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API_URL } from "../../constants";
+import { useElements, useStripe } from '@stripe/react-stripe-js';
 const Course_detail = () => {
+  const [clientSecret, setClientSecret] = useState('');
+  const stripe = useStripe();
+  const elements = useElements();
   const { id } = useParams();
   const [products, setProducts] = useState({});
   useEffect(() => {
@@ -11,7 +15,7 @@ const Course_detail = () => {
         .get(`${API_URL}/single-course/${id}`)
         .then((result) => {
           const [product] = result.data?.send;
-           console.log(product)
+           console.log("product =",product)
            setProducts(product);
          })
         .catch((error) => {
@@ -21,6 +25,10 @@ const Course_detail = () => {
       console.log(error);
     }
   }, []);
+  const bookingSeat = async ()=>{
+     const stipePaymentIntent = await axios.get(`${API_URL}/create-payment-intent/`);
+     console.log(stipePaymentIntent);
+  }
   return (
     <>
       <section
@@ -53,12 +61,19 @@ const Course_detail = () => {
                 <p>${products.course_fee?.$numberDecimal}</p>
               </div>
               <div className="course-info d-flex justify-content-between align-items-center">
+                <h5>Batch</h5>
+                <p>{products?.batch_name??'N/A'}</p>
+              </div>
+              <div className="course-info d-flex justify-content-between align-items-center">
                 <h5>Available Seats</h5>
                 <p>{products.available_seats}</p>
               </div>
               <div className="course-info d-flex justify-content-between align-items-center">
                 <h5>Schedule</h5>
                 <p>{products.schedule}</p>
+              </div>
+              <div className="course-info d-flex justify-content-between align-items-center">
+                <button className="booking_class" onClick={bookingSeat}>BOOK NOW</button>
               </div>
             </div>
           </div>
