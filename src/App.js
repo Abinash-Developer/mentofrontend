@@ -11,9 +11,6 @@ import Contact from './pages/Contact';
 import CourseSingle from './pages/CourseSingle';
 import AuthProvider from './auth/AuthProvider';
 import ProtectedRoute from './auth/ProtectedRoute';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-const stripePromise = loadStripe('pk_test_51NidCYLrsyYxaIR1udHyKuZXdNKeh85EYCrlNGU0jBtMAVrtxGmMfSSzU3kOHiY9HpOpRjvNElGicBYA4TJUWFH300zKYN7i8b');
 function App() {
   return (
     <>
@@ -21,7 +18,6 @@ function App() {
       <AuthProvider>
         <Header/>
         <main class="main">
-        <Elements stripe={stripePromise}>
         <Routes>
             <Route path="/" element={<Home />} />
             <Route element={<ProtectedRoute />}>
@@ -34,7 +30,6 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/course-detail/:id" element={<CourseSingle />} />
           </Routes>
-          </Elements>
         </main>
         <Footer/>
     </AuthProvider>
