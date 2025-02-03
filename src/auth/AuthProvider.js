@@ -10,19 +10,19 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   useEffect(()=>{
     try {
-      axios.post(`${API_URL}/varifySession`,
-        {token:token}
+      axios.post(`${API_URL}/varifySession`,{},
+        { headers: {"Authorization" : `Bearer ${token}`} }
       ).then((result)=>{
-        if(result?.data?.status){
+        if(!result?.data?.status){
           logOut();
         }
       }).catch((error)=>{
-        console.log(error);
+        console.log("Promise catch =",error);
       })
     } catch (error) {
-      
+      console.log("Catch try= ",error);
     }
-  },[]);
+  },[token]);
   const loginAction = async (data) => {
    
     try {
@@ -38,7 +38,6 @@ const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
-    alert("hj")
     setToken("");
     localStorage.removeItem("site");
     navigate("/");
