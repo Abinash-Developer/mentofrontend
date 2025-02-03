@@ -7,7 +7,6 @@ import 'react-status-alert/dist/status-alert.css';
 import { useAuth } from "../auth/AuthProvider";
 const Header = () => {
 const auth = useAuth();
-console.log(auth);
   const openMobileMenu = () => {
     const mobileNavToggleBtn = document.querySelector(".mobile-nav-toggle");
     document.querySelector("body").classList.toggle("mobile-nav-active");

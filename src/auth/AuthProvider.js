@@ -1,4 +1,4 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../constants";
@@ -8,6 +8,21 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("site") || "");
   const navigate = useNavigate();
+  useEffect(()=>{
+    try {
+      axios.post(`${API_URL}/varifySession`,
+        {token:token}
+      ).then((result)=>{
+        if(result?.data?.status){
+          logOut();
+        }
+      }).catch((error)=>{
+        console.log(error);
+      })
+    } catch (error) {
+      
+    }
+  },[]);
   const loginAction = async (data) => {
    
     try {
@@ -23,6 +38,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
+    alert("hj")
     setToken("");
     localStorage.removeItem("site");
     navigate("/");

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API_URL } from "../../constants";
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { useAuth } from "../../auth/AuthProvider";
 
 const Course_detail = () => {
   const [clientSecret, setClientSecret] = useState('');
@@ -13,7 +14,8 @@ const Course_detail = () => {
   const [loading, setLoading] = useState(false);
   const [paymentError, setPaymentError] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
+  const [user,setUser] = useState({});
+  const auth = useAuth();
   // Fetch course details on component mount
   useEffect(() => {
     try {
@@ -39,7 +41,9 @@ const Course_detail = () => {
     setPaymentError(null);
 
     try {
-      const { data } = await axios.get(`${API_URL}/create-payment-intent/`);
+      const { data } = await axios.post(`${API_URL}/create-payment-intent/`,{token:auth?.token});
+      console.log("Data =",data);
+      return;
       setClientSecret(data.clientSecret);
       setShowModal(true);
     } catch (error) {
