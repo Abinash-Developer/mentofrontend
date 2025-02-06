@@ -76,10 +76,9 @@ const Course_detail = () => {
       if (error) {
         setPaymentError(error.message);
       } else if (paymentIntent.status === "succeeded") {
-        const bookingResponse = await axios.post(`${API_URL}/booked-details`,{abinash:"Swain"},{headers:{Authorization: `Bearer ${auth?.token}`}});
-        return;
+        const bookingResponse = await axios.post(`${API_URL}/booked-details`,{course_id:id,user_id:user._id,price:paymentIntent.amount,payment_token:paymentIntent.id},{headers:{Authorization: `Bearer ${auth?.token}`}});
         StatusAlertService.showSuccess(
-          "Payment successful! You have successfully booked the seat."
+          "Payment successfull! You have successfully booked the seat."
         );
         setShowModal(false);
       }
